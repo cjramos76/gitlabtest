@@ -5,7 +5,10 @@ stages:
 
 compile:
   stage: compile
-  script: cat file1.txt file2.txt > compiled.txt
+  before_script:
+    - echo "Hello " > | tr -d "\n" | > file1.txt
+    - echo "world" > file2.txt
+  script: cat file1.txt file2.txt | grep -q 'Hello world'
   artifacts:
     paths:
     - compiled.txt
